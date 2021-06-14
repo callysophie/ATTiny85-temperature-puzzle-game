@@ -78,6 +78,7 @@ void setup() {
 
   // Initialize the wire library, but do not send any initialization sequence to the oled.
   // This leaves the screen area being the default for 128x64 screens
+//  oled.begin();
   oled.begin(0,0);
 
   // The default state of the SSD1306 does not turn on the internal charge pump
@@ -101,12 +102,12 @@ void setup() {
   oled.setFont(FONT8X16);
 
   // Setup the first half of memory.
-//  updateDisplay();
+  updateDisplay();
 
   // Turn on the display.
-//  oled.on();
-//  oled.clear();
-
+  oled.clear();
+  oled.on();
+  
 }
 
 // Happy Birthday melody 
@@ -160,8 +161,8 @@ oled.on();
   while (!sensor.isConversionComplete());  
   // Turns on OLED and runs updateDisplay function if sensor temp is below a certain amount
   if (sensor.getTempC() <= 15) {
-    oled.on();
     oled.clear();
+    oled.on();   
     updateDisplay();
     delay(1000);
   // Turns off OLED if sensor temp above that amount 
@@ -170,7 +171,7 @@ oled.on();
       oled.off();
   }
   // Runs melody2 function if sensor temp is above a certain amount
-  if (sensor.getTempC() >= 30) {
+  if (sensor.getTempC() >= 28) {
     // It's useful to include an LED to help debug
     digitalWrite(PB4, HIGH);
     melody2();
